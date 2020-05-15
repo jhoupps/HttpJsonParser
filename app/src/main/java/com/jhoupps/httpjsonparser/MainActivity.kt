@@ -1,15 +1,16 @@
 package com.jhoupps.httpjsonparser
 
-import androidx.appcompat.app.AppCompatActivity
+
+import android.R
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_main.*
 import android.util.Log
+import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
-//import com.ericchee.jsonfetcher.model.Email
-import com.google.gson.Gson
+import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
-import org.json.JSONObject
-import java.lang.Exception
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
     private fun fetchArtistWithRetroFit() {
         Log.i(TAG, "fetch1test")
 
-        //i think it's not entering this loop
+        //use the apimanager to get all the artists from the httpapp
         apiManager.getListOfArtist ({ allArtists ->
             val listOfArtists = allArtists.artists //this is already parsed!
             var tempList = mutableListOf<String>()
@@ -51,6 +52,9 @@ class MainActivity : AppCompatActivity() {
                 })
 
         Log.i(TAG, "fetch2test")
+
+        //val imageView = findViewById<View>(R.id.testOneImage) as ImageView
+        //Glide.with(this).load(allImageURLs[0]).into(R.id.testOneImage);
     }
 
 }
