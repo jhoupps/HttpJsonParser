@@ -10,11 +10,34 @@
         android:id="@+id/testOneImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/btnFetchHTTPs"
+        app:srcCompat="@drawable/ic_launcher_foreground"
+        app:layout_constraintBottom_toTopOf="@id/btnFetchHTTPs"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@id/btnAdvance"
+ />
+
+    <ImageButton
+        android:id="@+id/btnAdvance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/ic_launcher_foreground"
+        app:layout_constraintBottom_toTopOf="@id/btnFetchHTTPs"
+        app:layout_constraintLeft_toLeftOf="@id/testOneImage"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/btn_star_big_off" />
+
+        />
+    <ImageButton
+        android:id="@+id/btnPrev"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/ic_launcher_foreground"
+        app:layout_constraintBottom_toTopOf="@id/btnFetchHTTPs"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@id/testOneImage"
+
+        />
 
     <Button
         android:id="@+id/btnFetchHTTPs"

@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var apiManager: APIManager
     private val TAG = "jhoupps" //I can filter logs by this!
-    private lateinit var allImageURLs: List<String>
+    private var allImageURLs = listOf<String>()
     private var position by Delegates.notNull<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +29,15 @@ class MainActivity : AppCompatActivity() {
             fetchArtistWithRetroFit()
 
             Log.i(TAG, "buttontest")
+        }
+        //TODO- MAKE THIS HIDDEN UNTIL FETCH CLICKED
+        btnAdvance.setOnClickListener{
+            advanceImage()
+        }
+
+        //TODO- MAKE THIS HIDDEN UNTIL FETCH CLICKED
+        btnPrev.setOnClickListener{
+            advanceImage()
         }
     }
 
@@ -47,6 +56,8 @@ class MainActivity : AppCompatActivity() {
             }
 
             allImageURLs = tempList.toList()
+            position = 0
+            advanceImage()
 
             //val imageView = findViewById<View>(R.id.testOneImage) as ImageView
             //Glide.with(this).load(allImageURLs[0]).into(imageView);
@@ -60,7 +71,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun advanceImage(){
+    private fun advanceImage() {
         val totalLen = allImageURLs.size
         val imageView = findViewById<View>(R.id.testOneImage) as ImageView
 
@@ -68,6 +79,20 @@ class MainActivity : AppCompatActivity() {
             position += 1
         } else {
             position = 0
+        }
+
+        Glide.with(this).load(allImageURLs[position]).into(imageView);
+
+    }
+
+    private fun prevImage() {
+        val totalLen = allImageURLs.size
+        val imageView = findViewById<View>(R.id.testOneImage) as ImageView
+
+        if (position != 0) {
+            position += 1
+        } else {
+            position = allImageURLs.size
         }
 
         Glide.with(this).load(allImageURLs[position]).into(imageView);
