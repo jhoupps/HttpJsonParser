@@ -1,7 +1,6 @@
 package com.jhoupps.httpjsonparser
 
 
-import android.R
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.properties.Delegates
 
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var apiManager: APIManager
     private val TAG = "jhoupps" //I can filter logs by this!
     private lateinit var allImageURLs: List<String>
+    private var position by Delegates.notNull<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +47,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             allImageURLs = tempList.toList()
+
+            //val imageView = findViewById<View>(R.id.testOneImage) as ImageView
+            //Glide.with(this).load(allImageURLs[0]).into(imageView);
         },
                 {
                     Toast.makeText(this, "Error, james wilson! ", Toast.LENGTH_SHORT).show()
@@ -53,8 +57,21 @@ class MainActivity : AppCompatActivity() {
 
         Log.i(TAG, "fetch2test")
 
-        //val imageView = findViewById<View>(R.id.testOneImage) as ImageView
-        //Glide.with(this).load(allImageURLs[0]).into(R.id.testOneImage);
+
+    }
+
+    fun advanceImage(){
+        val totalLen = allImageURLs.size
+        val imageView = findViewById<View>(R.id.testOneImage) as ImageView
+
+        if (position < totalLen) {
+            position += 1
+        } else {
+            position = 0
+        }
+
+        Glide.with(this).load(allImageURLs[position]).into(imageView);
+
     }
 
 }
