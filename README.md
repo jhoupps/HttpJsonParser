@@ -10,7 +10,9 @@ In order to fulfill the Application class data requirement, I implemented
 an upvote counter, and accessed it from within my main activity. 
 
 Title: HttpJsonParser
+
 My Full Name: Jay Houppermans
+
 Photo of my app running on an emulator:
 
 ![image of it working](https://github.com/jhoupps/HttpJsonParser/blob/hw4/screenshot.png)
