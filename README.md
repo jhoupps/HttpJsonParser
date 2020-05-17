@@ -13,7 +13,7 @@ Title: HttpJsonParser
 My Full Name: Jay Houppermans
 Photo of my app running on an emulator:
 
-![image of it working](https://github.com/jhoupps/Dotify/HttpJsonParser/hw1/screenshot.png)
+![image of it working](https://github.com/jhoupps/HttpJsonParser/blob/hw4/screenshot.png)
 
 
 Known Bugs:
