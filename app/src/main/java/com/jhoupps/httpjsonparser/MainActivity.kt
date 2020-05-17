@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
         //TODO- MAKE THIS HIDDEN UNTIL FETCH CLICKED
         btnPrev.setOnClickListener{
-            advanceImage()
+            prevImage()
         }
     }
 
@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         val totalLen = allImageURLs.size
         val imageView = findViewById<View>(R.id.testOneImage) as ImageView
 
-        if (position < totalLen) {
+        if (position < totalLen - 1) {
             position += 1
         } else {
             position = 0
@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         if (position != 0) {
             position -= 1
         } else {
-            position = totalLen
+            position = totalLen - 1
         }
 
         Glide.with(this).load(allImageURLs[position]).into(imageView);
