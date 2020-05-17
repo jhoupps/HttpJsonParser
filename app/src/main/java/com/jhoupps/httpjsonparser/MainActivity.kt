@@ -1,6 +1,5 @@
 package com.jhoupps.httpjsonparser
 
-
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,14 +8,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.properties.Delegates
 
-
+//The one and only activity of the app
+//This activity interacts with all the various parts of the UI and interfaces with the API manager
+//and the RetroHttP app
 class MainActivity : AppCompatActivity() {
-
     private lateinit var apiManager: APIManager
     private val TAG = "jhoupps" //I can filter logs by this!
-    private var allImageURLs = listOf<String>()
+    var allImageURLs = listOf<String>("f")
     private var position = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,25 +26,29 @@ class MainActivity : AppCompatActivity() {
 
         btnFetchHTTPs.setOnClickListener {
             fetchArtistWithRetroFit()
-
-            Log.i(TAG, "buttontest")
         }
-        //TODO- MAKE THIS HIDDEN UNTIL FETCH CLICKED
+
         btnAdvance.setOnClickListener{
             advanceImage()
         }
 
-        //TODO- MAKE THIS HIDDEN UNTIL FETCH CLICKED
         btnPrev.setOnClickListener{
             prevImage()
         }
+
+        //Todo - I acknowledge that hardcoding max size is in poor style
+        //I would fix this, but I ran out of time
+        //If I were to bring this app to production, this is the next change I would make
+        btnUpvote.setOnClickListener{
+            tvFavorites.text = apiManager.getFavoriteCount(position, 47).toString() +" upvotes"
+            apiManager.favoriteCount[position] += 1
+            tvFavorites.text = apiManager.getFavoriteCount(position, 47).toString() +" upvotes"
+        }
     }
 
-    //The fetching mechanics
+    //Fetching the Json and calling the Glide tool
     private fun fetchArtistWithRetroFit() {
-        Log.i(TAG, "fetch1test")
-
-        //use the apimanager to get all the artists from the httpapp
+        //use the apimanager to get all the artists from the httpApp
         apiManager.getListOfArtist ({ allArtists ->
             val listOfArtists = allArtists.artists //this is already parsed!
             var tempList = mutableListOf<String>()
@@ -57,22 +60,17 @@ class MainActivity : AppCompatActivity() {
 
             allImageURLs = tempList.toList()
             advanceImage()
-
-            //val imageView = findViewById<View>(R.id.testOneImage) as ImageView
-            //Glide.with(this).load(allImageURLs[0]).into(imageView);
         },
                 {
-                    Toast.makeText(this, "Error, james wilson! ", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Error: Check your internet connection and try again ", Toast.LENGTH_SHORT).show()
                 })
-
-        Log.i(TAG, "fetch2test")
-
-
     }
 
+    //When the button is pushed, the image advances
+    //This is also called when the images are first loaded
     private fun advanceImage() {
         val totalLen = allImageURLs.size
-        val imageView = findViewById<View>(R.id.testOneImage) as ImageView
+        val imageView = findViewById<View>(R.id.imMyImageView) as ImageView
 
         if (position < totalLen - 1) {
             position += 1
@@ -82,20 +80,23 @@ class MainActivity : AppCompatActivity() {
 
         Glide.with(this).load(allImageURLs[position]).into(imageView);
 
-        testOneImage.visibility = View.VISIBLE
+        imMyImageView.visibility = View.VISIBLE
         btnPrev.visibility = View.VISIBLE
         btnAdvance.visibility = View.VISIBLE
         tvProgress.visibility = View.VISIBLE
         btnFetchHTTPs.visibility = View.GONE
+        tvFavorites.visibility = View.VISIBLE
+        btnUpvote.visibility = View.VISIBLE
 
-        //tvProgress.text = "Image $position out of $totalLen"
-        tvProgress.text = "Image"
+        tvProgress.text = "Image $position out of $totalLen"
+        tvFavorites.text = apiManager.getFavoriteCount(position, 47).toString() +" upvotes"
 
     }
 
+    //When the button is pushed, the image goes back one
     private fun prevImage() {
         val totalLen = allImageURLs.size
-        val imageView = findViewById<View>(R.id.testOneImage) as ImageView
+        val imageView = findViewById<View>(R.id.imMyImageView) as ImageView
 
         if (position != 0) {
             position -= 1
@@ -105,8 +106,7 @@ class MainActivity : AppCompatActivity() {
 
         Glide.with(this).load(allImageURLs[position]).into(imageView);
         tvProgress.text = "Image $position out of $totalLen"
-
+        tvFavorites.text = apiManager.getFavoriteCount(position, 47).toString() +" upvotes"
     }
-
 }
 
