@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var apiManager: APIManager
     private val TAG = "jhoupps" //I can filter logs by this!
     private var allImageURLs = listOf<String>()
-    private var position by Delegates.notNull<Int>()
+    private var position = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +56,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             allImageURLs = tempList.toList()
-            position = 0
             advanceImage()
 
             //val imageView = findViewById<View>(R.id.testOneImage) as ImageView
@@ -83,6 +82,15 @@ class MainActivity : AppCompatActivity() {
 
         Glide.with(this).load(allImageURLs[position]).into(imageView);
 
+        testOneImage.visibility = View.VISIBLE
+        btnPrev.visibility = View.VISIBLE
+        btnAdvance.visibility = View.VISIBLE
+        tvProgress.visibility = View.VISIBLE
+        btnFetchHTTPs.visibility = View.GONE
+
+        //tvProgress.text = "Image $position out of $totalLen"
+        tvProgress.text = "Image"
+
     }
 
     private fun prevImage() {
@@ -90,12 +98,13 @@ class MainActivity : AppCompatActivity() {
         val imageView = findViewById<View>(R.id.testOneImage) as ImageView
 
         if (position != 0) {
-            position += 1
+            position -= 1
         } else {
-            position = allImageURLs.size
+            position = totalLen
         }
 
         Glide.with(this).load(allImageURLs[position]).into(imageView);
+        tvProgress.text = "Image $position out of $totalLen"
 
     }
 

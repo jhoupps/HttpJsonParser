@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,47 +7,57 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
     <ImageView
         android:id="@+id/testOneImage"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_launcher_foreground"
-        app:layout_constraintBottom_toTopOf="@id/btnFetchHTTPs"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="@id/btnAdvance"
- />
+        android:visibility="gone" />
 
-    <ImageButton
-        android:id="@+id/btnAdvance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        app:srcCompat="@drawable/ic_launcher_foreground"
-        app:layout_constraintBottom_toTopOf="@id/btnFetchHTTPs"
-        app:layout_constraintLeft_toLeftOf="@id/testOneImage"
-        app:layout_constraintRight_toRightOf="parent"
 
-        />
-    <ImageButton
-        android:id="@+id/btnPrev"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        app:srcCompat="@drawable/ic_launcher_foreground"
-        app:layout_constraintBottom_toTopOf="@id/btnFetchHTTPs"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="@id/testOneImage"
+        <Button
+            android:id="@+id/btnFetchHTTPs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fetch Images" />
 
-        />
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btnFetchHTTPs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fetch Images"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/testOneImage"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/btnPrev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Show Previous"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btnAdvance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Show Next"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="template"
+            android:visibility="gone"/>
+
+
+    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
