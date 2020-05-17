@@ -13,5 +13,11 @@ Title: HttpJsonParser
 My Full Name: Jay Houppermans
 Photo of my app running on an emulator:
 
+![image of it working](https://github.com/jhoupps/Dotify/HttpJsonParser/hw1/screenshot.png)
 
 
+Known Bugs:
+I hardcode one value in MainActivity.kt, when I should instead dynamically generate the size
+I ran into troubleshooting bugs that I did not have time to fix when I attempted to do it dynamically
+
+If I were to put this app on the app store or something, I would fix this first.
